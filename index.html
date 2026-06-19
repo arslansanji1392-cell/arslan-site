@@ -2,64 +2,81 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>سایت رسمی ارسلان</title>
+<title>دکمه فرار حرفه‌ای</title>
 <style>
     body {
+        background: #111;
+        color: white;
         font-family: sans-serif;
         text-align: center;
-        direction: rtl;
-        background: #f2f2f2;
-        padding-top: 50px;
+        overflow: hidden;
     }
-    #box {
-        display: none;
-        margin-top: 20px;
-    }
-    button {
-        padding: 10px 20px;
-        font-size: 18px;
-        border: none;
-        background: #007bff;
+
+    #btn {
+        position: absolute;
+        padding: 15px 30px;
+        background: #ff4444;
         color: white;
-        border-radius: 8px;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.2s;
     }
-    input {
-        padding: 10px;
-        font-size: 18px;
-        width: 200px;
-        border-radius: 8px;
-        border: 1px solid #aaa;
+
+    .emoji {
+        position: absolute;
+        font-size: 30px;
+        animation: fall 1.5s linear forwards;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-50px); opacity: 1; }
+        100% { transform: translateY(500px); opacity: 0; }
     }
 </style>
 </head>
 <body>
 
-<h2>سلام به سایت رسمی ارسلان، خوش آمدید</h2>
+<h2>بزن منو اگه می‌تونی 😄🔥</h2>
 
-<button onclick="showBox()">کلیک کنید</button>
+<button id="btn">بزن منو</button>
 
-<div id="box">
-    <br>
-    <input id="num" type="text" placeholder="شماره را وارد کنید">
-    <br><br>
-    <button onclick="send()">تایید</button>
-</div>
-
-<p id="result" style="font-size:20px; margin-top:20px;"></p>
+<audio id="sound" src="https://www.fesliyanstudios.com/play-mp3/4386"></audio>
 
 <script>
-function showBox() {
-    document.getElementById("box").style.display = "block";
+const btn = document.getElementById("btn");
+const sound = document.getElementById("sound");
+
+function randomPos() {
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 150);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
 }
 
-function send() {
-    let number = document.getElementById("num").value;
-    if (number.trim() === "") {
-        document.getElementById("result").innerHTML = "لطفا شماره وارد کنید";
-    } else {
-        document.getElementById("result").innerHTML = "چخبر آقا طاهر لاشی 😄😄";
+btn.addEventListener("mouseover", () => {
+    btn.style.background = "#" + Math.floor(Math.random()*16777215).toString(16);
+    btn.style.transform = "scale(" + (0.8 + Math.random()*1.2) + ")";
+    randomPos();
+});
+
+btn.addEventListener("click", () => {
+    sound.play();
+    navigator.vibrate?.(300);
+
+    for (let i = 0; i < 20; i++) {
+        let e = document.createElement("div");
+        e.className = "emoji";
+        e.innerHTML = ["😂","🔥","😄","💥","🤣"][Math.floor(Math.random()*5)];
+        e.style.left = Math.random()*window.innerWidth + "px";
+        e.style.top = "-20px";
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 1500);
     }
-}
+
+    alert("بالاخره گرفتی منو 😄🔥");
+});
 </script>
 
 </body>
