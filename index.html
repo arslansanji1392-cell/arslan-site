@@ -1,1 +1,66 @@
-<h1>سلام، این سایت Arslan هست</h1>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>سایت رسمی ارسلان</title>
+<style>
+    body {
+        font-family: sans-serif;
+        text-align: center;
+        direction: rtl;
+        background: #f2f2f2;
+        padding-top: 50px;
+    }
+    #box {
+        display: none;
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        background: #007bff;
+        color: white;
+        border-radius: 8px;
+    }
+    input {
+        padding: 10px;
+        font-size: 18px;
+        width: 200px;
+        border-radius: 8px;
+        border: 1px solid #aaa;
+    }
+</style>
+</head>
+<body>
+
+<h2>سلام به سایت رسمی ارسلان، خوش آمدید</h2>
+
+<button onclick="showBox()">کلیک کنید</button>
+
+<div id="box">
+    <br>
+    <input id="num" type="text" placeholder="شماره را وارد کنید">
+    <br><br>
+    <button onclick="send()">تایید</button>
+</div>
+
+<p id="result" style="font-size:20px; margin-top:20px;"></p>
+
+<script>
+function showBox() {
+    document.getElementById("box").style.display = "block";
+}
+
+function send() {
+    let number = document.getElementById("num").value;
+    if (number.trim() === "") {
+        document.getElementById("result").innerHTML = "لطفا شماره وارد کنید";
+    } else {
+        document.getElementById("result").innerHTML = "چخبر آقا طاهر لاشی 😄😄";
+    }
+}
+</script>
+
+</body>
+</html>
