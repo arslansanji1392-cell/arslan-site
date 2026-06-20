@@ -2,82 +2,55 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>دکمه فرار حرفه‌ای</title>
+<title>کوروش کبیر</title>
 <style>
     body {
         background: #111;
-        color: white;
+        color: #fff;
         font-family: sans-serif;
         text-align: center;
-        overflow: hidden;
+        padding: 20px;
+        line-height: 1.8;
     }
 
-    #btn {
-        position: absolute;
-        padding: 15px 30px;
-        background: #ff4444;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 20px;
-        cursor: pointer;
-        transition: 0.2s;
+    h1 {
+        color: #ffd700;
+        margin-bottom: 20px;
     }
 
-    .emoji {
-        position: absolute;
-        font-size: 30px;
-        animation: fall 1.5s linear forwards;
+    img {
+        width: 80%;
+        max-width: 350px;
+        border-radius: 15px;
+        margin: 20px 0;
+        border: 3px solid #ffd700;
     }
 
-    @keyframes fall {
-        0% { transform: translateY(-50px); opacity: 1; }
-        100% { transform: translateY(500px); opacity: 0; }
+    .box {
+        background: #222;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid #444;
+        margin-top: 20px;
     }
 </style>
 </head>
 <body>
 
-<h2>بزن منو اگه می‌تونی 😄🔥</h2>
+<h1>کوروش کبیر</h1>
 
-<button id="btn">بزن منو</button>
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Cyrus_the_Great%2C_Babylon%2C_Iran.jpg" alt="کوروش کبیر">
 
-<audio id="sound" src="https://www.fesliyanstudios.com/play-mp3/4386"></audio>
+<div class="box">
+    <p>
+        کوروش دوم، مشهور به کوروش کبیر، بنیان‌گذار شاهنشاهی هخامنشی و یکی از بزرگ‌ترین فرمانروایان تاریخ ایران است.
+        او به دلیل عدالت، آزادی‌بخشی و احترام به فرهنگ‌ها و ادیان مختلف، در جهان شناخته شده است.
+    </p>
 
-<script>
-const btn = document.getElementById("btn");
-const sound = document.getElementById("sound");
-
-function randomPos() {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 150);
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
-}
-
-btn.addEventListener("mouseover", () => {
-    btn.style.background = "#" + Math.floor(Math.random()*16777215).toString(16);
-    btn.style.transform = "scale(" + (0.8 + Math.random()*1.2) + ")";
-    randomPos();
-});
-
-btn.addEventListener("click", () => {
-    sound.play();
-    navigator.vibrate?.(300);
-
-    for (let i = 0; i < 20; i++) {
-        let e = document.createElement("div");
-        e.className = "emoji";
-        e.innerHTML = ["😂","🔥","😄","💥","🤣"][Math.floor(Math.random()*5)];
-        e.style.left = Math.random()*window.innerWidth + "px";
-        e.style.top = "-20px";
-        document.body.appendChild(e);
-        setTimeout(() => e.remove(), 1500);
-    }
-
-    alert("بالاخره گرفتی منو 😄🔥");
-});
-</script>
+    <p>
+        منشور کوروش که به عنوان نخستین بیانیه حقوق بشر شناخته می‌شود، نمادی از تفکر انسانی و صلح‌طلبانه اوست.
+    </p>
+</div>
 
 </body>
 </html>
