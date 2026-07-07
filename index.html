@@ -2,55 +2,103 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>کوروش کبیر</title>
+<title>گردونه شانس</title>
 <style>
-    body {
-        background: #111;
-        color: #fff;
-        font-family: sans-serif;
-        text-align: center;
-        padding: 20px;
-        line-height: 1.8;
-    }
+body {
+    background: #111;
+    color: #fff;
+    text-align: center;
+    font-family: sans-serif;
+}
 
-    h1 {
-        color: #ffd700;
-        margin-bottom: 20px;
-    }
+h2 {
+    margin-top: 20px;
+    font-size: 28px;
+}
 
-    img {
-        width: 80%;
-        max-width: 350px;
-        border-radius: 15px;
-        margin: 20px 0;
-        border: 3px solid #ffd700;
-    }
+#wheel {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+    transition: transform 5s ease;
+}
 
-    .box {
-        background: #222;
-        padding: 20px;
-        border-radius: 15px;
-        border: 1px solid #444;
-        margin-top: 20px;
-    }
+.slice {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: 0% 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background: orange;
+    color: #000;
+    cursor: pointer;
+    margin-top: 20px;
+}
 </style>
 </head>
 <body>
 
-<h1>کوروش کبیر</h1>
+<h2>کلیک کن تا برنده شی!</h2>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Cyrus_the_Great%2C_Babylon%2C_Iran.jpg" alt="کوروش کبیر">
+<div id="wheel"></div>
 
-<div class="box">
-    <p>
-        کوروش دوم، مشهور به کوروش کبیر، بنیان‌گذار شاهنشاهی هخامنشی و یکی از بزرگ‌ترین فرمانروایان تاریخ ایران است.
-        او به دلیل عدالت، آزادی‌بخشی و احترام به فرهنگ‌ها و ادیان مختلف، در جهان شناخته شده است.
-    </p>
+<button onclick="spinWheel()">گردوندن</button>
 
-    <p>
-        منشور کوروش که به عنوان نخستین بیانیه حقوق بشر شناخته می‌شود، نمادی از تفکر انسانی و صلح‌طلبانه اوست.
-    </p>
-</div>
+<script>
+const prizes = [
+    "پوچ",
+    "۲۰ هزار تومان",
+    "۴۰ هزار تومان",
+    "۶۰ هزار تومان",
+    "۸۰ هزار تومان",
+    "۱۲۰ هزار تومان",
+    "پوچ"
+];
+
+const colors = [
+    "green",
+    "red",
+    "green",
+    "red",
+    "green",
+    "red",
+    "green"
+];
+
+const wheel = document.getElementById("wheel");
+
+for (let i = 0; i < 7; i++) {
+    const slice = document.createElement("div");
+    slice.className = "slice";
+    slice.style.background = colors[i];
+    slice.style.transform = `rotate(${(360/7)*i}deg) skewY(-50deg)`;
+    slice.innerHTML = prizes[i];
+    wheel.appendChild(slice);
+}
+
+function spinWheel() {
+    const randomSpin = Math.floor(Math.random() * 3600) + 360;
+    wheel.style.transform = `rotate(${randomSpin}deg)`;
+}
+</script>
 
 </body>
 </html>
