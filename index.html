@@ -17,18 +17,27 @@ h2 {
     color: #ffd700;
 }
 
+/* فلش بالا */
+#pointer {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 40px solid #ffd700;
+    margin: 0 auto;
+}
+
 #wheel {
-    width: 320px;
-    height: 320px;
+    width: 330px;
+    height: 330px;
     border-radius: 50%;
-    margin: 30px auto;
+    margin: 20px auto;
     position: relative;
     overflow: hidden;
     border: 8px solid #ffd700;
     transition: transform 4s ease-out;
 }
 
-/* هر تکه گردونه */
 .slice {
     position: absolute;
     width: 50%;
@@ -36,9 +45,23 @@ h2 {
     left: 50%;
     top: 50%;
     transform-origin: 0% 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
 }
 
-/* دکمه */
+/* نمایش نتیجه وسط صفحه */
+#result {
+    margin-top: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
 button {
     padding: 15px 40px;
     font-size: 22px;
@@ -56,11 +79,24 @@ button {
 
 <h2>کلیک کن تا برنده شی!</h2>
 
+<div id="pointer"></div>
 <div id="wheel"></div>
 
 <button onclick="spinWheel()">گردوندن</button>
 
+<div id="result"></div>
+
 <script>
+const prizes = [
+    "پوچ",
+    "۲۰ هزار",
+    "۴۰ هزار",
+    "۶۰ هزار",
+    "۸۰ هزار",
+    "۱۲۰ هزار",
+    "پوچ"
+];
+
 const colors = [
     "green",
     "red",
@@ -72,18 +108,30 @@ const colors = [
 ];
 
 const wheel = document.getElementById("wheel");
+const resultBox = document.getElementById("result");
 
+// ساختن تکه‌های گردونه
 for (let i = 0; i < 7; i++) {
     const slice = document.createElement("div");
     slice.className = "slice";
     slice.style.background = colors[i];
     slice.style.transform = `rotate(${(360/7)*i}deg) skewY(-50deg)`;
+    slice.innerHTML = prizes[i];
     wheel.appendChild(slice);
 }
 
 function spinWheel() {
-    const randomSpin = Math.floor(Math.random() * 3600) + 360;
-    wheel.style.transform = `rotate(${randomSpin}deg)`;
+    const spin = Math.floor(Math.random() * 3600) + 360;
+    wheel.style.transform = `rotate(${spin}deg)`;
+
+    // محاسبهٔ بخش انتخاب‌شده
+    setTimeout(() => {
+        const finalDeg = spin % 360;
+        const section = Math.floor(finalDeg / (360 / 7));
+        const prize = prizes[prizes.length - 1 - section];
+
+        resultBox.innerHTML = "نتیجه: " + prize;
+    }, 4000);
 }
 </script>
 
