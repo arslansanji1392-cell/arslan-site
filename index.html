@@ -87,13 +87,14 @@ button {
 <div id="result"></div>
 
 <script>
+// دونه‌به‌دونه از ۲۰ شروع می‌کنیم
 const prizes = [
-    "پوچ",
     "۲۰ هزار",
     "۴۰ هزار",
     "۶۰ هزار",
     "۸۰ هزار",
     "۱۲۰ هزار",
+    "پوچ",
     "پوچ"
 ];
 
@@ -120,17 +121,34 @@ for (let i = 0; i < 7; i++) {
     wheel.appendChild(slice);
 }
 
+// اندیس‌های جوایز ۶۰ به بالا و زیر ۶۰
+const highPrizeIndexes = [2, 3, 4];      // ۶۰، ۸۰، ۱۲۰
+const lowPrizeIndexes  = [0, 1, 5, 6];   // ۲۰، ۴۰، پوچ‌ها
+
 function spinWheel() {
+    // چرخش ظاهری گردونه
     const spin = Math.floor(Math.random() * 3600) + 360;
     wheel.style.transform = `rotate(${spin}deg)`;
 
-    // محاسبهٔ بخش انتخاب‌شده
-    setTimeout(() => {
-        const finalDeg = spin % 360;
-        const section = Math.floor(finalDeg / (360 / 7));
-        const prize = prizes[prizes.length - 1 - section];
+    // انتخاب جایزه بر اساس شانس واقعی
+    const r = Math.random();
+    let index;
 
-        resultBox.innerHTML = "نتیجه: " + prize;
+    if (r < 0.4) {
+        // ۴۰ درصد: یکی از جوایز ۶۰ به بالا
+        index = highPrizeIndexes[
+            Math.floor(Math.random() * highPrizeIndexes.length)
+        ];
+    } else {
+        // ۶۰ درصد: یکی از جوایز زیر ۶۰ یا پوچ
+        index = lowPrizeIndexes[
+            Math.floor(Math.random() * lowPrizeIndexes.length)
+        ];
+    }
+
+    // نمایش نتیجه وسط صفحه بعد از پایان چرخش
+    setTimeout(() => {
+        resultBox.innerHTML = "نتیجه: " + prizes[index];
     }, 4000);
 }
 </script>
